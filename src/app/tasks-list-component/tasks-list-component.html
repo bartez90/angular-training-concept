@@ -1,0 +1,32 @@
+<div class="main-box">
+    <h2 appHighlight class="heading">{{ getDay() }} you will do {{ maxTasks }} tasks</h2>
+    <label for="max-tasks">Max tasks today: </label>
+    <input [(ngModel)]="maxTasks" id="max-tasks" type="number">
+    <div>
+        Tasks list:
+        <ul class="list">
+            <!-- defaultColor="yellow" -->
+            <li 
+                appHighlight
+                highlightColor="lightBlue"
+                *ngFor="let task of tasks; let i = index" 
+                [ngClass]="{'list-background': !(i % 2)}">
+                <app-task-item [task]="task" (taskTextClicked)="onTaskSelect($event)">
+                    <div #content>additional content</div>
+                </app-task-item>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="isLimitReached() else taskLimit">
+        <input #newTaskInput type="text" (keydown)="checkInput($event)">
+        <button [disabled]="!canAddTask" class="btn" (click)="addTask(newTaskInput)">Add task</button>
+    </div>
+    <!-- <ng-template ngIf="isLimitReached()">
+        <input #newTaskInput type="text" (keydown)="checkInput($event)">
+        <button [disabled]="!canAddTask" class="btn" (click)="addTask(newTaskInput)">Add task</button>
+    </ng-template> -->
+    <ng-template  #taskLimit>
+        <p [ngStyle]="{'color': getTextColor()}">You've reached task limit!</p>
+    </ng-template>
+    <p>{{ selectedTaskText }}</p>
+</div>

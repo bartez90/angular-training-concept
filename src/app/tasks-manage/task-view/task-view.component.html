@@ -1,0 +1,5 @@
+<h2>Task info:</h2>
+<p>Name: {{ task.name }}</p>
+<p *ngIf="task.deadline">Deadline: {{ task.deadline }}</p>
+<p *ngIf="task.priority">Priority: {{ task.priority }}</p>
+<p *ngIf="task.details" >Details: {{ task.details }}</p>

@@ -1,0 +1,24 @@
+.navbar {
+    width: 100%;
+    position: fixed;
+    padding: 30px;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 5vh;
+    background-color: blue;
+
+    &-link {
+        margin: 0 30px;
+        font-size: 28px;
+        text-decoration: none;
+        color: white;
+        opacity: 0.8;
+
+        &:hover, &-active {
+            opacity: 1;
+        }
+    }
+}
+

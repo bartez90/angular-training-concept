@@ -1,0 +1,52 @@
+<div>
+    <form (ngSubmit)="onSave()" #form="ngForm">
+        <label for="task-name">Name: </label>
+        <input 
+            id="task-name" 
+            [ngModel]="task.name"
+            name="name"
+            type="text" 
+            required>
+        <br>
+        <label for="task-priority">Priority: </label>
+        <select
+            [ngModel]="task.priority"
+            name="priority"
+            id="task-priority" 
+            required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{ priority | titlecase }}</option>
+        </select>
+        <br>
+        <label for="task-deadline">Deadline: </label>
+        <input 
+            [ngModel]="task.deadline || date | date: 'yyyy-MM-dd'"
+            [ngClass]="{'invalid': invalidDate}"
+            name="deadline"
+            id="task-deadline" 
+            type="date" 
+            required>
+        <br>
+        <label for="task-details"></label>
+        <div class="additional-data" ngModelGroup="additionalData" #additionalData="ngModelGroup">
+            <input type="email" ngModel name="email" email required>
+            <br>
+            <input type="text" ngModel name="randomInput" required>
+            <br><br>
+            <button 
+                [disabled]="!additionalData.valid" 
+                class="btn" type="button" 
+                (click)="onFillData()">
+                Fill data
+            </button>
+        </div>
+        <textarea 
+            [ngModel]="task.details"
+            name="details"
+            id="task-details" 
+            cols="40" 
+            rows="6">
+        </textarea>
+        <br>
+        <button [disabled]="!form.valid || invalidDate" class="btn" type="submit">Save</button>
+    </form>
+</div>
